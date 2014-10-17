@@ -82,14 +82,15 @@ class Game
   end
   
   def save_game
-    board = @board.to_yaml
+    save = [@board, @player]
     File.open("checkers_save", "w") do |f|
-      f.puts board
+      f.puts save.to_yaml
     end
   end
   
   def load_game
-    @board = YAML::load(File.read("checkers_save")) if File.exist?("checkers_save")
+    save = YAML::load(File.read("checkers_save")) if File.exist?("checkers_save")
+    @board, @player = save[0], save[1]
   end
   
 end
