@@ -28,7 +28,6 @@ class Piece
     else
       @is_king = true if @pos[0] == 7
     end
-    p "is king: #{@is_king}"
   end
   
   def slide_moves
@@ -99,7 +98,7 @@ class Piece
     sequence.each do |j_pos|
       return false unless perform_jump(j_pos)
     end
-  end 
+  end
   
   def valid_move_seq?(sequence)
     jumps = jumping_moves(@color)
@@ -107,7 +106,6 @@ class Piece
     if !moves.include? sequence.first
       raise InvalidMoveError.new "That piece can not move like that!"
     elsif !jumps.empty? && !jumps.include?(sequence.first)
-      p "valid_move_seq jumps are: #{jumps}"
       raise InvalidMoveError.new "If you can take a piece, you must!"
     elsif !@board.dup[@pos].perform_moves! sequence
       raise InvalidMoveError.new "Not a valid move sequence!"
