@@ -1,6 +1,5 @@
 # encoding: UTF-8
 require_relative 'board.rb'
-require 'byebug'
 
 class InvalidMoveError < StandardError
 end
@@ -69,7 +68,6 @@ class Piece
     jump_dir = [(pos[0] - @pos[0])/2, (pos[1] - @pos[1])/2]
     if possible_vector? jump_dir
       middle_pos = [@pos[0] + jump_dir[0], @pos[1] + jump_dir[1]]
-      #byebug
       # in_bounds && middle position is not nil & occupied by opposite color & final pos is empty
       if in_bounds?(pos) && !@board[middle_pos].nil? && @board[middle_pos].color != color && @board[pos].nil?
         @board[pos] = self

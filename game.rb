@@ -1,10 +1,8 @@
 # encoding: UTF-8
 require_relative 'board.rb'
 require 'yaml'
-require 'byebug'
+
 class Game
-  # class InvalidMoveError < StandardError
-  # end
   
   def initialize
     @board = Board.new
@@ -15,9 +13,6 @@ class Game
     @player = true
     puts "Hello! Welcome to checkers, please enter in a move in the form of c2d1"
     puts "If you are jumping multiple pieces, please chain them in the form of f1d3b5"
-    
-    # @board[[4,1]] = Piece.new(false, [4, 1], @board)
-    # @board[[1, 4]] = nil
     
     until game_over?
       @board.display
@@ -72,12 +67,10 @@ class Game
   end
   
   def no_pieces(color)
-     #p "no pieces: #{!@board.grid.flatten.compact.any? { |p| p.color == color }}"
      !@board.grid.flatten.compact.any? { |p| p.color == color }
   end
   
   def no_moves(color)
-    #p "no moves: #{!@board.grid.flatten.compact.all? { |p| p.moves.empty? }}"
     @board.grid.flatten.compact.all? { |p| p.moves.empty? && p.color == color }
   end
   
