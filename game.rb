@@ -23,7 +23,7 @@ class Game
       @board.display
       
       input = get_valid_move
-      input.first.perform_moves(input.last)
+      input.first.perform_moves(@player, input.last)
       
       system "clear" or system "cls"
       
@@ -57,35 +57,13 @@ class Game
   
       start = all_positions.shift
       piece = @board[start]
-
-      # moves = piece.moves
-      # jumps = jumping_moves(piece.color)
       
-      return [piece, all_positions] if piece.valid_move_seq?(all_positions)
+      return [piece, all_positions] if piece.valid_move_seq?(@player, all_positions)
       
     rescue InvalidMoveError => e
       puts e
       retry
     end
-  
-      # if !moves.include? all_positions.first
-#         raise InvalidMoveError.new "That piece can not move like that!"
-#       elsif !jumps.empty? && !jumps.include?(all_positions.first)
-#         p "jumps are: #{jumps}"
-#         raise InvalidMoveError.new "If you can take a piece, you must"
-#       else
-#         # Determine if piece jumped as far as it can
-#         b = @board.dup
-#         cp = b[start]
-#         if cp.jump_moves.include? all_positions.first # Piece move is a jump
-#           cp.perform_moves! all_positions
-#           unless cp.jump_moves.empty?
-#             raise InvalidMoveError.new "You must jump as many tims as you can"
-#           end
-#         end
-#
-         # return [piece, all_positions]
-#       end
     
   end
   

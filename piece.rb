@@ -82,9 +82,9 @@ class Piece
     false
   end
   
-  def perform_moves(sequence)
-    if valid_move_seq? sequence
-      self.perform_moves! sequence
+  def perform_moves(color, sequence)
+    if valid_move_seq?(color, sequence)
+      self.perform_moves!(sequence)
       true
     else
       false
@@ -100,9 +100,9 @@ class Piece
     end
   end
   
-  def valid_move_seq?(sequence)
+  def valid_move_seq?(color, sequence)
     jumps = jumping_moves(@color)
-
+    raise InvalidMoveError.new "You must move your own piece!" unless @color == color
     if !moves.include? sequence.first
       raise InvalidMoveError.new "That piece can not move like that!"
     elsif !jumps.empty? && !jumps.include?(sequence.first)
