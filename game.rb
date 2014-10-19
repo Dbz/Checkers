@@ -67,6 +67,7 @@ class Game
       puts "It's a tie!"
       return true
     elsif no_moves(!@player)
+      puts "Uh oh, you just lost!"
       return true
     end
     false
