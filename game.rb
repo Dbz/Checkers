@@ -63,7 +63,13 @@ class Game
   end
   
   def game_over?
-    no_pieces(!@player) || no_moves(!@player)
+    if no_pieces(!@player)
+      puts "It's a tie!"
+      return true
+    elsif no_moves(!@player)
+      return true
+    end
+    false
   end
   
   def no_pieces(color)
